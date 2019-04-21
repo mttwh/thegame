@@ -1,4 +1,4 @@
 module.exports = {
-  database:'mongodb+srv://mttwh:<bottle yellow dolphin>@cluster0-9ef8p.gcp.mongodb.net/test?retryWrites=true',
+  database:'mongodb://mttwh:psubrandywine19@ds137255.mlab.com:37255/heroku_9619lwzx',
   secret: 'yoursecret'
 }

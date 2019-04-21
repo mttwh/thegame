@@ -5,12 +5,28 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+var http = require('http');
+const mongoose = require('mongoose');
 const config = require('./config/database');
 
 
 // Init App
 const app = express();
 
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://mttwh:psubrandywine19@ds137255.mlab.com:37255/heroku_9619lwzx';
+
+var theport = process.env.PORT || 5000;
+
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 // Bring in Models
 //let Article = require('./models/article');
 
@@ -83,6 +99,6 @@ app.use('/users', users);
 app.use('/calculations', calculations);
 
 // Start Server
-app.listen(process.env.PORT || 5000, function(){
-  console.log('Server started on port 5000...');
+app.listen(theport, function(){
+  console.log('Server started on port ' + theport + '...');
 });
