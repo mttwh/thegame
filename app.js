@@ -15,7 +15,7 @@ const app = express();
 //let Article = require('./models/article');
 
 // Load View Engine
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'pug');
 
 // Body Parser Middleware
@@ -83,6 +83,6 @@ app.use('/users', users);
 app.use('/calculations', calculations);
 
 // Start Server
-app.listen(3210, function(){
-  console.log('Server started on port 3210...');
+app.listen(process.env.PORT || 5000, function(){
+  console.log('Server started on port 5000...');
 });
