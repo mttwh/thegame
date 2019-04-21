@@ -1,18 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
+let yearlySalary;
+
 let monthlySalary;
-let salary;
-let balance;
+let monthlyBudget;
 
 router.post('/calculate', function(req, res){
-    monthlySalary = req.body.monthlySalary;
+    yearlySalary = req.body.yearlySalary;
     let monthlyRent = req.body.monthlyRent;
-    let expenses = req.body.expenses;
-    console.log(monthlySalary + "- salary");
-    req.checkBody('monthlySalary', 'Please enter your salary').notEmpty();
+    let monthlyExpenses = req.body.monthlyExpenses;
+    let rent = parseInt(monthlyRent);
+    let exp = parseInt(monthlyExpenses);
+    
+   
+
+
+
+    req.checkBody('yearlySalary', 'Please enter your salary').notEmpty();
     req.checkBody('monthlyRent', 'Please enter your rent (even if its 0)').notEmpty();
-    req.checkBody('expenses', 'Please enter your expenses').notEmpty();
+    req.checkBody('monthlyExpenses', 'Please enter your expenses').notEmpty();
 
     let errors = req.validationErrors();
 
@@ -21,10 +28,16 @@ router.post('/calculate', function(req, res){
             errors:errors
         });
     } else {
-        balance = (monthlySalary - (monthlyRent - expenses));
-        salary = (monthlySalary * 12);
+        monthlySalary = (yearlySalary / 12);
+        console.log(monthlySalary + "- monthly salary");
+        console.log(rent + ' - ' + exp);
+        let totalMonthlyExpenses = +rent+exp;
+        console.log(totalMonthlyExpenses + ' - total');
+        monthlyBudget = (monthlySalary - totalMonthlyExpenses).toFixed(2);
+        console.log(monthlyBudget);
+
+
         
-        console.log("Balance - " + balance);
         console.log(req.body);
         res.redirect('/calculations/budget')
     }
@@ -32,8 +45,7 @@ router.post('/calculate', function(req, res){
 
 router.get('/budget', function(req, res){
     res.render('budget', {
-        salary:salary,
-        balance:balance
+        monthlyBudget:monthlyBudget
     });
 });
 

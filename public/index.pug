@@ -2,17 +2,20 @@ extends layout
 
 block content
   h1 Managing your finances is hard <br> We make it easy!
+  if user
+    p.alert.alert-success Welcome, mttwh!
   hr
   form(action="/calculations/calculate", method="post")
     #form-group
-      label Monthly Salary:
-      input.form-control(type='text', placeholder='Monthly Salary', name='monthlySalary')
+      label Yearly Salary:
+      input.form-control(type='text', placeholder='Yearly Salary', name='yearlySalary')
     #form-group
       label Monthly Rent:
       input.form-control(type="text", placeholder='Monthly Rent', name='monthlyRent')
     #form-group
-      label Expenses:
-      input.form-control(type='text', placeholder='Enter expenses here', name='expenses')
+      label Monthly Expenses:
+      input.form-control(type='text', placeholder='Enter monthly expenses here', name='monthlyExpenses')
+      br
     input.btn.btn-primary(type='submit', value='Calculate Budget')
 
 
