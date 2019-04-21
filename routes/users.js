@@ -26,6 +26,8 @@ router.post('/register', function(req, res){
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
+
+
   let errors = req.validationErrors();
 
   if(errors){
@@ -40,23 +42,35 @@ router.post('/register', function(req, res){
       password:password
     });
 
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err){
-          console.log(err);
+    User.findOne({
+      'username': req.body.username,
+      'email': req.body.email }, function(err, user){
+        if(user){
+          //user exists
+          req.flash('danger', "That username or email address is taken. Try again");
+          res.render('register');
+          console.log("Username or email exists");
+        } else {
+          //user does not exist
+          bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(newUser.password, salt, function(err, hash){
+              if(err){
+                console.log(err);
+              }
+              newUser.password = hash;
+              newUser.save(function(err){
+                if(err){
+                  console.log(err);
+                  return;
+                } else {
+                  req.flash('success','You are now registered and can log in');
+                  res.redirect('/users/login');
+                }
+              });
+            });
+          });
         }
-        newUser.password = hash;
-        newUser.save(function(err){
-          if(err){
-            console.log(err);
-            return;
-          } else {
-            req.flash('success','You are now registered and can log in');
-            res.redirect('/users/login');
-          }
-        });
       });
-    });
   }
 });
 
