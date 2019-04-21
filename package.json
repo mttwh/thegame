@@ -1,0 +1,30 @@
+{
+  "name": "nodekb",
+  "version": "1.0.0",
+  "description": "Simple knowledgebase app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Brad Traversy",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/datastore": "^3.1.2",
+    "@google-cloud/nodejs-repo-tools": "^3.2.0",
+    "@google-cloud/storage": "^2.5.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "connect-flash": "^0.1.1",
+    "express": "^4.15.3",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.3",
+    "express-validator": "^3.2.0",
+    "knex": "^0.16.5",
+    "mongodb": "^3.2.3",
+    "mongoose": "^4.10.2",
+    "mysql": "^2.17.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.1"
+  }
+}

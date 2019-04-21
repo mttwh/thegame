@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Managing your finances is hard <br> We make it easy!
+  hr
+  form(action="/calculations/calculate", method="post")
+    #form-group
+      label Monthly Salary:
+      input.form-control(type='text', placeholder='Monthly Salary', name='monthlySalary')
+    #form-group
+      label Monthly Rent:
+      input.form-control(type="text", placeholder='Monthly Rent', name='monthlyRent')
+    #form-group
+      label Expenses:
+      input.form-control(type='text', placeholder='Enter expenses here', name='expenses')
+    input.btn.btn-primary(type='submit', value='Calculate Budget')
+
+
+
+
+
+
+
